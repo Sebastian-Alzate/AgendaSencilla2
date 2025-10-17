@@ -131,4 +131,52 @@ public class CControl {
             return null;
         }
     }
+    
+    public ArrayList<CContacto> listarPrefijos(String prefijo) {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarPrefijos(conecta, prefijo);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarAlfabeticamente() {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarAlfabeticamente(conecta);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarIdPar() {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarIdPar(conecta);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarIdImpar() {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarIdImpar(conecta);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
 }

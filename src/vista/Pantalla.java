@@ -14,9 +14,9 @@ import modelo.CContacto;
  * @author Asus
  */
 public class Pantalla extends javax.swing.JFrame {
-
+    
     DefaultTableModel modelo;
-
+    
     CControl c = new CControl();
 
     /**
@@ -554,7 +554,7 @@ public class Pantalla extends javax.swing.JFrame {
                 salida.setText("No se pudo agregar el contacto.");
             }
         } else {
-            salida.setText("Ingrese los datos del contacto.");
+            salida.setText("Ingrese los datos del contacto para agregar.");
         }
     }//GEN-LAST:event_AgregarActionPerformed
 
@@ -562,7 +562,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.consultar();
-
+        
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -586,7 +586,7 @@ public class Pantalla extends javax.swing.JFrame {
                 salida.setText("No se encontró el email.");
             }
         } else {
-            salida.setText("Ingrese un email.");
+            salida.setText("Ingrese un email para buscar el contacto para borrar.");
         }
     }//GEN-LAST:event_BorrarActionPerformed
 
@@ -600,15 +600,16 @@ public class Pantalla extends javax.swing.JFrame {
                 salida.setText("No se encontró el email.");
             }
         } else {
-            salida.setText("Ingrese un email.");
+            salida.setText("Ingrese un email para buscar el contacto para editar.");
         }
     }//GEN-LAST:event_EditarActionPerformed
 
     private void ListarCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCiudadesActionPerformed
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
+        if (!ciudad.getText().isEmpty()) {
         lista = c.buscarCiudad(ciudad.getText());
-
+        
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -620,77 +621,96 @@ public class Pantalla extends javax.swing.JFrame {
         } else {
             salida.setText("No hay contactos en la ciudad de: " + ciudad.getText());
         }
+        } else {
+            salida.setText("Ingrese una ciudad para buscar.");
+        }
     }//GEN-LAST:event_ListarCiudadesActionPerformed
 
     private void ListarIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarIdActionPerformed
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
-        lista = c.listarRangoId(idInicio.getText(), idFin.getText());
-
-        modelo.setRowCount(0);
-        boolean hayDatos = false;
-        for (CContacto con : lista) {
-            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
-            hayDatos = true;
-        }
-        if (hayDatos) {
-            salida.setText("Contactos desde el " + idInicio.getText() + " al " + idFin.getText() + " consultados.");
+        if (!idInicio.getText().isEmpty() && !idFin.getText().isEmpty()) {
+            lista = c.listarRangoId(idInicio.getText(), idFin.getText());
+            
+            modelo.setRowCount(0);
+            boolean hayDatos = false;
+            for (CContacto con : lista) {
+                modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+                hayDatos = true;
+            }
+            if (hayDatos) {
+                salida.setText("Contactos desde el " + idInicio.getText() + " al " + idFin.getText() + " consultados.");
+            } else {
+                salida.setText("No hay contactos desde el " + idInicio.getText() + " al " + idFin.getText() + ".");
+            }
         } else {
-            salida.setText("No hay contactos desde el " + idInicio.getText() + " al " + idFin.getText() + ".");
+            salida.setText("Ingrese el rango de ID para buscar.");
         }
     }//GEN-LAST:event_ListarIdActionPerformed
 
     private void BuscarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarNombreActionPerformed
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
-        lista = c.buscarNombre(nombre.getText());
-
-        modelo.setRowCount(0);
-        boolean hayDatos = false;
-        for (CContacto con : lista) {
-            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
-            hayDatos = true;
-        }
-        if (hayDatos) {
-            salida.setText("Contactos por el nombre o inicial de " + nombre.getText() + ", consultados.");
+        if (!nombre.getText().isEmpty()) {
+            lista = c.buscarNombre(nombre.getText());
+            
+            modelo.setRowCount(0);
+            boolean hayDatos = false;
+            for (CContacto con : lista) {
+                modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+                hayDatos = true;
+            }
+            if (hayDatos) {
+                salida.setText("Contactos por el nombre o inicial de " + nombre.getText() + ", consultados.");
+            } else {
+                salida.setText("No hay contactos por el nombre o inicial de " + nombre.getText() + ".");
+            }
         } else {
-            salida.setText("No hay contactos por el nombre o inicial de " + nombre.getText() + ".");
+            salida.setText("Ingrese un nombre o una inicial para buscar.");
         }
     }//GEN-LAST:event_BuscarNombreActionPerformed
 
     private void BuscarApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarApellidoActionPerformed
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
-        lista = c.buscarApellido(apellido.getText());
-
-        modelo.setRowCount(0);
-        boolean hayDatos = false;
-        for (CContacto con : lista) {
-            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
-            hayDatos = true;
-        }
-        if (hayDatos) {
-            salida.setText("Contactos por el apellido o inicial de " + apellido.getText() + ", consultados.");
+        if (!apellido.getText().isEmpty()) {
+            lista = c.buscarApellido(apellido.getText());
+            
+            modelo.setRowCount(0);
+            boolean hayDatos = false;
+            for (CContacto con : lista) {
+                modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+                hayDatos = true;
+            }
+            if (hayDatos) {
+                salida.setText("Contactos por el apellido o inicial de " + apellido.getText() + ", consultados.");
+            } else {
+                salida.setText("No hay contactos por el apellido o inicial de " + apellido.getText() + ".");
+            }
         } else {
-            salida.setText("No hay contactos por el apellido o inicial de " + apellido.getText() + ".");
+            salida.setText("Ingrese un apellido o una inicial para buscar.");
         }
     }//GEN-LAST:event_BuscarApellidoActionPerformed
 
     private void BuscarIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarIdActionPerformed
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
-        lista = c.buscarId(idBuscar.getText());
-
-        modelo.setRowCount(0);
-        boolean hayDatos = false;
-        for (CContacto con : lista) {
-            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
-            hayDatos = true;
-        }
-        if (hayDatos) {
-            salida.setText("Contacto por el ID: " + idBuscar.getText() + ", consultado.");
+        if (!idBuscar.getText().isEmpty()) {
+            lista = c.buscarId(idBuscar.getText());
+            
+            modelo.setRowCount(0);
+            boolean hayDatos = false;
+            for (CContacto con : lista) {
+                modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+                hayDatos = true;
+            }
+            if (hayDatos) {
+                salida.setText("Contacto por el ID: " + idBuscar.getText() + ", consultado.");
+            } else {
+                salida.setText("No hay contactos por el ID: " + idBuscar.getText() + ".");
+            }
         } else {
-            salida.setText("No hay contactos por el ID: " + idBuscar.getText() + ".");
+            salida.setText("Ingresa un id para buscar.");
         }
     }//GEN-LAST:event_BuscarIdActionPerformed
 
@@ -698,7 +718,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarCalles();
-
+        
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -716,7 +736,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarCarreras();
-
+        
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -732,27 +752,79 @@ public class Pantalla extends javax.swing.JFrame {
 
     private void ListarPrefijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarPrefijoActionPerformed
         // TODO add your handling code here:
-
+        ArrayList<CContacto> lista = new ArrayList<>();
+        lista = c.listarPrefijos(prefijo.getText());
+        
+        modelo.setRowCount(0);
+        boolean hayDatos = false;
+        for (CContacto con : lista) {
+            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            hayDatos = true;
+        }
+        if (hayDatos) {
+            salida.setText("Contactos con el prefijo: " + prefijo.getText() + ", consultados.");
+        } else {
+            salida.setText("No hay contactos con el prefijo: " + prefijo.getText() + ".");
+        }
     }//GEN-LAST:event_ListarPrefijoActionPerformed
 
     private void ListarAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarAlfaActionPerformed
         // TODO add your handling code here:
-
+        ArrayList<CContacto> lista = new ArrayList<>();
+        lista = c.listarAlfabeticamente();
+        
+        modelo.setRowCount(0);
+        boolean hayDatos = false;
+        for (CContacto con : lista) {
+            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            hayDatos = true;
+        }
+        if (hayDatos) {
+            salida.setText("Contactos organizados alfabeticamente consultados.");
+        } else {
+            salida.setText("No hay contactos para organizar.");
+        }
     }//GEN-LAST:event_ListarAlfaActionPerformed
 
     private void ListarIdParActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarIdParActionPerformed
         // TODO add your handling code here:
-
+        ArrayList<CContacto> lista = new ArrayList<>();
+        lista = c.listarIdPar();
+        
+        modelo.setRowCount(0);
+        boolean hayDatos = false;
+        for (CContacto con : lista) {
+            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            hayDatos = true;
+        }
+        if (hayDatos) {
+            salida.setText("Contactos con id par consultados.");
+        } else {
+            salida.setText("No hay contactos con id par.");
+        }
     }//GEN-LAST:event_ListarIdParActionPerformed
 
     private void ListarIdImparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarIdImparActionPerformed
         // TODO add your handling code here:
-
+        ArrayList<CContacto> lista = new ArrayList<>();
+        lista = c.listarIdImpar();
+        
+        modelo.setRowCount(0);
+        boolean hayDatos = false;
+        for (CContacto con : lista) {
+            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            hayDatos = true;
+        }
+        if (hayDatos) {
+            salida.setText("Contactos con id impar consultados.");
+        } else {
+            salida.setText("No hay contactos con id impar.");
+        }
     }//GEN-LAST:event_ListarIdImparActionPerformed
 
     private void ListarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCampoActionPerformed
         // TODO add your handling code here:
-
+        
     }//GEN-LAST:event_ListarCampoActionPerformed
 
     private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed

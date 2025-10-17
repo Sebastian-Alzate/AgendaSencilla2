@@ -273,4 +273,108 @@ public class CConsultas {
             return null;
         }
     }
+    
+    public ArrayList<CContacto> listarPrefijos(Connection con, String prefijo) {
+        this.con = con;
+        query = "SELECT * FROM datos WHERE telefono LIKE '%" + prefijo + "%';";
+        ArrayList<CContacto> lista = new ArrayList<>();
+        try {
+            PreparedStatement preparar = con.prepareStatement(query);
+            ResultSet resultado = preparar.executeQuery();
+            
+            while (resultado.next()) {
+                CContacto c = new CContacto(
+                        resultado.getInt("id"),
+                        resultado.getString("nombres"),
+                        resultado.getString("apellidos"),
+                        resultado.getString("telefono"),
+                        resultado.getString("direccion"),
+                        resultado.getString("email"));
+                lista.add(c);
+            }
+            System.out.println("Contactos por el prefijo requerido consultados."); 
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println("Error en el sql.");
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarAlfabeticamente(Connection con) {
+        this.con = con;
+        query = "SELECT * FROM datos ORDER BY nombres ASC;";
+        ArrayList<CContacto> lista = new ArrayList<>();
+        try {
+            PreparedStatement preparar = con.prepareStatement(query);
+            ResultSet resultado = preparar.executeQuery();
+            
+            while (resultado.next()) {
+                CContacto c = new CContacto(
+                        resultado.getInt("id"),
+                        resultado.getString("nombres"),
+                        resultado.getString("apellidos"),
+                        resultado.getString("telefono"),
+                        resultado.getString("direccion"),
+                        resultado.getString("email"));
+                lista.add(c);
+            }
+            System.out.println("Contactos organizados alfabeticamente consultados."); 
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println("Error en el sql.");
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarIdPar(Connection con) {
+        this.con = con;
+        query = "SELECT * FROM datos WHERE id % 2 = 0";
+        ArrayList<CContacto> lista = new ArrayList<>();
+        try {
+            PreparedStatement preparar = con.prepareStatement(query);
+            ResultSet resultado = preparar.executeQuery();
+            
+            while (resultado.next()) {
+                CContacto c = new CContacto(
+                        resultado.getInt("id"),
+                        resultado.getString("nombres"),
+                        resultado.getString("apellidos"),
+                        resultado.getString("telefono"),
+                        resultado.getString("direccion"),
+                        resultado.getString("email"));
+                lista.add(c);
+            }
+            System.out.println("Contactos con id par consultados."); 
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println("Error en el sql.");
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarIdImpar(Connection con) {
+        this.con = con;
+        query = "SELECT * FROM datos WHERE id % 2 != 0";
+        ArrayList<CContacto> lista = new ArrayList<>();
+        try {
+            PreparedStatement preparar = con.prepareStatement(query);
+            ResultSet resultado = preparar.executeQuery();
+            
+            while (resultado.next()) {
+                CContacto c = new CContacto(
+                        resultado.getInt("id"),
+                        resultado.getString("nombres"),
+                        resultado.getString("apellidos"),
+                        resultado.getString("telefono"),
+                        resultado.getString("direccion"),
+                        resultado.getString("email"));
+                lista.add(c);
+            }
+            System.out.println("Contactos con id impar consultados."); 
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println("Error en el sql.");
+            return null;
+        }
+    }
 }
