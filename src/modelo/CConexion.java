@@ -7,7 +7,7 @@ public class CConexion {
 
     String usuario = "root";
     String contrasena = "";
-    String url = "jdbc:mysql://72.167.84.254/agenda";
+    String url = "jdbc:mysql://localhost:3306/agenda";
 
     public Connection conectar() {
         Connection con = null;
@@ -16,6 +16,7 @@ public class CConexion {
             System.out.println("Conexion correcta");
             return con;
         } catch (Exception e) {
+            System.out.println("No se pudo conectar.");
             return null;
         }
     }
@@ -25,7 +26,7 @@ public class CConexion {
             con.close();
             System.out.println("Se cerró la conexión");
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println("No se pudo desconectar.");
         }
     }
     

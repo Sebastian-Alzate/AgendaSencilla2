@@ -546,7 +546,16 @@ public class Pantalla extends javax.swing.JFrame {
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         // TODO add your handling code here:
-        c.insertar(nombres.getText(), apellidos.getText(), telefono.getText(), direccion.getText(), email.getText());
+        if (!nombres.getText().isEmpty() && !apellidos.getText().isEmpty() && !telefono.getText().isEmpty() && !direccion.getText().isEmpty() && !email.getText().isEmpty()) {
+            boolean bandera = c.insertar(nombres.getText(), apellidos.getText(), telefono.getText(), direccion.getText(), email.getText());
+            if (bandera) {
+                salida.setText("Se agregó el contacto correctamente.");
+            } else {
+                salida.setText("No se pudo agregar el contacto.");
+            }
+        } else {
+            salida.setText("Ingrese los datos del contacto.");
+        }
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
@@ -555,79 +564,117 @@ public class Pantalla extends javax.swing.JFrame {
         lista = c.consultar();
 
         modelo.setRowCount(0);
+        boolean hayDatos = false;
         for (CContacto con : lista) {
-            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getDireccion(), con.getTelefono(), con.getEmail()});
+            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            hayDatos = true;
+        }
+        if (hayDatos) {
+            salida.setText("Contactos consultados correctamente.");
+        } else {
+            salida.setText("No hay contactos para consultar.");
         }
     }//GEN-LAST:event_ConsultarActionPerformed
 
     private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
         // TODO add your handling code here:
-        
+        if (!email.getText().isEmpty()) {
+            boolean bandera = c.borrar(email.getText());
+            if (bandera) {
+                salida.setText("Se eliminó el contacto correctamente.");
+            } else {
+                salida.setText("No se encontró el email.");
+            }
+        } else {
+            salida.setText("Ingrese un email.");
+        }
     }//GEN-LAST:event_BorrarActionPerformed
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
         // TODO add your handling code here:
-        
+        if (!nombres.getText().isEmpty() && !apellidos.getText().isEmpty() && !telefono.getText().isEmpty() && !direccion.getText().isEmpty() && !email.getText().isEmpty()) {
+            boolean bandera = c.editar(nombres.getText(), apellidos.getText(), telefono.getText(), direccion.getText(), email.getText());
+            if (bandera) {
+                salida.setText("Se editó el contacto correctamente.");
+            } else {
+                salida.setText("No se encontró el email.");
+            }
+        } else {
+            salida.setText("Ingrese un email.");
+        }
     }//GEN-LAST:event_EditarActionPerformed
 
     private void ListarCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCiudadesActionPerformed
         // TODO add your handling code here:
-        
+        ArrayList<CContacto> lista = new ArrayList<>();
+        lista = c.buscarCiudad(ciudad.getText());
+
+        modelo.setRowCount(0);
+        boolean hayDatos = false;
+        for (CContacto con : lista) {
+            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            hayDatos = true;
+        }
+        if (hayDatos) {
+            salida.setText("Contactos en la ciudad de: " + ciudad.getText() + ", consultados .");
+        } else {
+            salida.setText("No hay contactos en la ciudad de: " + ciudad.getText());
+        }
     }//GEN-LAST:event_ListarCiudadesActionPerformed
 
     private void ListarIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarIdActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarIdActionPerformed
 
     private void BuscarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarNombreActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_BuscarNombreActionPerformed
 
     private void BuscarApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarApellidoActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_BuscarApellidoActionPerformed
 
     private void BuscarIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarIdActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_BuscarIdActionPerformed
 
     private void ListarCallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCallesActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarCallesActionPerformed
 
     private void ListarCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCarrerasActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarCarrerasActionPerformed
 
     private void ListarPrefijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarPrefijoActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarPrefijoActionPerformed
 
     private void ListarAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarAlfaActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarAlfaActionPerformed
 
     private void ListarIdParActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarIdParActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarIdParActionPerformed
 
     private void ListarIdImparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarIdImparActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarIdImparActionPerformed
 
     private void ListarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCampoActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ListarCampoActionPerformed
 
     private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
