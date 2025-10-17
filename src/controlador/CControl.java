@@ -59,4 +59,76 @@ public class CControl {
             return null;
         }
     }
+    
+    public ArrayList<CContacto> listarRangoId(String idInicio, String idFin) {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarRangoId(conecta, idInicio, idFin);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> buscarNombre(String nombre) {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.buscarNombre(conecta, nombre);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> buscarApellido(String apellido) {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.buscarApellido(conecta, apellido);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> buscarId(String idBuscar) {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.buscarId(conecta, idBuscar);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarCalles() {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarCalles(conecta);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
+    
+    public ArrayList<CContacto> listarCarreras() {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarCarreras(conecta);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
 }

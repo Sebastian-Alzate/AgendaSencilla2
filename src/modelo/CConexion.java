@@ -28,6 +28,5 @@ public class CConexion {
         } catch (Exception e) {
             System.out.println("No se pudo desconectar.");
         }
-    }
-    
+    }  
 }
