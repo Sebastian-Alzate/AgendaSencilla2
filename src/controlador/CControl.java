@@ -179,4 +179,16 @@ public class CControl {
             return null;
         }
     }
+    
+    public ArrayList<CContacto> listarCampo(String campo) {
+        ArrayList<CContacto> lista = new ArrayList<>();
+        conecta = con.conectar();
+        if (conecta != null) {
+            lista = consulta.listarCampo(conecta, campo);
+            con.desconectar(conecta);
+            return lista;
+        } else {
+            return null;
+        }
+    }
 }

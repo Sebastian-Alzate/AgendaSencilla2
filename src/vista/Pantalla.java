@@ -14,9 +14,9 @@ import modelo.CContacto;
  * @author Asus
  */
 public class Pantalla extends javax.swing.JFrame {
-    
+
     DefaultTableModel modelo;
-    
+
     CControl c = new CControl();
 
     /**
@@ -95,9 +95,9 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         ListarIdImpar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        campo = new javax.swing.JTextField();
         ListarCampo = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
+        campo = new javax.swing.JComboBox<>();
 
         jLabel6.setText("jLabel6");
 
@@ -275,6 +275,13 @@ public class Pantalla extends javax.swing.JFrame {
             }
         });
 
+        campo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nombres", "apellidos", "telefono", "direccion", "email" }));
+        campo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -402,7 +409,6 @@ public class Pantalla extends javax.swing.JFrame {
                             .addComponent(ltelefono)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
@@ -421,11 +427,11 @@ public class Pantalla extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jLabel13))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(ListarCampo)))
+                        .addComponent(ListarCampo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -562,7 +568,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.consultar();
-        
+
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -608,19 +614,19 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         if (!ciudad.getText().isEmpty()) {
-        lista = c.buscarCiudad(ciudad.getText());
-        
-        modelo.setRowCount(0);
-        boolean hayDatos = false;
-        for (CContacto con : lista) {
-            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
-            hayDatos = true;
-        }
-        if (hayDatos) {
-            salida.setText("Contactos en la ciudad de: " + ciudad.getText() + ", consultados.");
-        } else {
-            salida.setText("No hay contactos en la ciudad de: " + ciudad.getText());
-        }
+            lista = c.buscarCiudad(ciudad.getText());
+
+            modelo.setRowCount(0);
+            boolean hayDatos = false;
+            for (CContacto con : lista) {
+                modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+                hayDatos = true;
+            }
+            if (hayDatos) {
+                salida.setText("Contactos en la ciudad de: " + ciudad.getText() + ", consultados.");
+            } else {
+                salida.setText("No hay contactos en la ciudad de: " + ciudad.getText());
+            }
         } else {
             salida.setText("Ingrese una ciudad para buscar.");
         }
@@ -631,7 +637,7 @@ public class Pantalla extends javax.swing.JFrame {
         ArrayList<CContacto> lista = new ArrayList<>();
         if (!idInicio.getText().isEmpty() && !idFin.getText().isEmpty()) {
             lista = c.listarRangoId(idInicio.getText(), idFin.getText());
-            
+
             modelo.setRowCount(0);
             boolean hayDatos = false;
             for (CContacto con : lista) {
@@ -653,7 +659,7 @@ public class Pantalla extends javax.swing.JFrame {
         ArrayList<CContacto> lista = new ArrayList<>();
         if (!nombre.getText().isEmpty()) {
             lista = c.buscarNombre(nombre.getText());
-            
+
             modelo.setRowCount(0);
             boolean hayDatos = false;
             for (CContacto con : lista) {
@@ -675,7 +681,7 @@ public class Pantalla extends javax.swing.JFrame {
         ArrayList<CContacto> lista = new ArrayList<>();
         if (!apellido.getText().isEmpty()) {
             lista = c.buscarApellido(apellido.getText());
-            
+
             modelo.setRowCount(0);
             boolean hayDatos = false;
             for (CContacto con : lista) {
@@ -697,7 +703,7 @@ public class Pantalla extends javax.swing.JFrame {
         ArrayList<CContacto> lista = new ArrayList<>();
         if (!idBuscar.getText().isEmpty()) {
             lista = c.buscarId(idBuscar.getText());
-            
+
             modelo.setRowCount(0);
             boolean hayDatos = false;
             for (CContacto con : lista) {
@@ -718,7 +724,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarCalles();
-        
+
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -736,7 +742,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarCarreras();
-        
+
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -754,7 +760,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarPrefijos(prefijo.getText());
-        
+
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -772,7 +778,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarAlfabeticamente();
-        
+
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -790,7 +796,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarIdPar();
-        
+
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -808,7 +814,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
         lista = c.listarIdImpar();
-        
+
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
@@ -824,13 +830,31 @@ public class Pantalla extends javax.swing.JFrame {
 
     private void ListarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCampoActionPerformed
         // TODO add your handling code here:
-        
+        ArrayList<CContacto> lista = new ArrayList<>();
+        String seleccion = (String) campo.getSelectedItem();
+        lista = c.listarCampo(seleccion);
+
+        modelo.setRowCount(0);
+        boolean hayDatos = false;
+        for (CContacto con : lista) {
+            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            hayDatos = true;
+        }
+        if (hayDatos) {
+            salida.setText("Datos del campo del campo: " + seleccion + ", consultados.");
+        } else {
+            salida.setText("No hay datos en el campo: " + seleccion + ".");
+        }
     }//GEN-LAST:event_ListarCampoActionPerformed
 
     private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_CerrarActionPerformed
+
+    private void campoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -894,7 +918,7 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JButton ListarPrefijo;
     private javax.swing.JTextField apellido;
     private javax.swing.JTextField apellidos;
-    private javax.swing.JTextField campo;
+    private javax.swing.JComboBox<String> campo;
     private javax.swing.JTextField ciudad;
     private javax.swing.JTextField direccion;
     private javax.swing.JTextField email;
