@@ -20,7 +20,7 @@ public class CContacto {
         this.telefono=telefono;
         this.email=email;
     }
-
+    
     public int getId() {
         return id;
     }

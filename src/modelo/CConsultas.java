@@ -377,7 +377,7 @@ public class CConsultas {
             return null;
         }
     }
-    
+
     public ArrayList<CContacto> listarCampo(Connection con, String campo) {
         this.con = con;
         query = "SELECT id, " + campo + " FROM datos;";
@@ -385,35 +385,41 @@ public class CConsultas {
         try {
             PreparedStatement preparar = con.prepareStatement(query);
             ResultSet resultado = preparar.executeQuery();
-            
+            if (campo.equals("id")) {
+                while (resultado.next()) {
+                    CContacto c = new CContacto(resultado.getInt(campo), "", "", "", "", "");
+                    lista.add(c);
+                }
+                System.out.println("Datos del campo id consultados.");
+            }
             if (campo.equals("nombres")) {
                 while (resultado.next()) {
-                    CContacto c = new CContacto(resultado.getInt("id"), resultado.getString("nombres"), "", "", "", "");
-                lista.add(c);
+                    CContacto c = new CContacto(0, resultado.getString(campo), "", "", "", "");
+                    lista.add(c);
                 }
                 System.out.println("Datos del campo nombres consultados.");
-            }if (campo.equals("apellidos")) {
+            } else if (campo.equals("apellidos")) {
                 while (resultado.next()) {
-                    CContacto c = new CContacto(resultado.getInt("id"), "", resultado.getString("apellidos"), "", "", "");
-                lista.add(c);
+                    CContacto c = new CContacto(0, "", resultado.getString(campo), "", "", "");
+                    lista.add(c);
                 }
                 System.out.println("Datos del campo apellidos consultados");
-            }if (campo.equals("telefono")) {
+            } else if (campo.equals("telefono")) {
                 while (resultado.next()) {
-                    CContacto c = new CContacto(resultado.getInt("id"), "", "", resultado.getString("telefono"), "", "");
-                lista.add(c);
+                    CContacto c = new CContacto(0, "", "", resultado.getString(campo), "", "");
+                    lista.add(c);
                 }
                 System.out.println("Datos del campo telefono consultado");
-            }if (campo.equals("direccion")) {
+            } else if (campo.equals("direccion")) {
                 while (resultado.next()) {
-                    CContacto c = new CContacto(resultado.getInt("id"), "", "", "", resultado.getString("direccion"), "");
-                lista.add(c);
+                    CContacto c = new CContacto(0, "", "", "", resultado.getString(campo), "");
+                    lista.add(c);
                 }
                 System.out.println("Datos del campo direccion consultados");
-            }if (campo.equals("email")) {
+            } else if (campo.equals("email")) {
                 while (resultado.next()) {
-                    CContacto c = new CContacto(resultado.getInt("id"), "", "", "", "", resultado.getString("email"));
-                lista.add(c);
+                    CContacto c = new CContacto(0, "", "", "", "", resultado.getString(campo));
+                    lista.add(c);
                 }
                 System.out.println("Datos del campo email consultados");
             }

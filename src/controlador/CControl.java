@@ -2,7 +2,6 @@ package controlador;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import vista.*;
 import modelo.*;
 
 public class CControl {

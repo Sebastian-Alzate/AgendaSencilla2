@@ -275,7 +275,7 @@ public class Pantalla extends javax.swing.JFrame {
             }
         });
 
-        campo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nombres", "apellidos", "telefono", "direccion", "email" }));
+        campo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "id", "nombres", "apellidos", "telefono", "direccion", "email" }));
         campo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoActionPerformed(evt);
@@ -831,19 +831,18 @@ public class Pantalla extends javax.swing.JFrame {
     private void ListarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCampoActionPerformed
         // TODO add your handling code here:
         ArrayList<CContacto> lista = new ArrayList<>();
-        String seleccion = (String) campo.getSelectedItem();
-        lista = c.listarCampo(seleccion);
+        lista = c.listarCampo((String) campo.getSelectedItem());
 
         modelo.setRowCount(0);
         boolean hayDatos = false;
         for (CContacto con : lista) {
-            modelo.addRow(new Object[]{con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
+            modelo.addRow(new Object[]{con.getId() == 0 ? "" : con.getId(), con.getNombres(), con.getApellidos(), con.getTelefono(), con.getDireccion(), con.getEmail()});
             hayDatos = true;
         }
         if (hayDatos) {
-            salida.setText("Datos del campo del campo: " + seleccion + ", consultados.");
+            salida.setText("Datos del campo del campo: " + (String) campo.getSelectedItem() + ", consultados.");
         } else {
-            salida.setText("No hay datos en el campo: " + seleccion + ".");
+            salida.setText("No hay datos en el campo: " + (String) campo.getSelectedItem() + ".");
         }
     }//GEN-LAST:event_ListarCampoActionPerformed
 

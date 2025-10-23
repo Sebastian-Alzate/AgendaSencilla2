@@ -695,12 +695,13 @@
     <Component class="javax.swing.JComboBox" name="campo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="nombres"/>
-            <StringItem index="1" value="apellidos"/>
-            <StringItem index="2" value="telefono"/>
-            <StringItem index="3" value="direccion"/>
-            <StringItem index="4" value="email"/>
+          <StringArray count="6">
+            <StringItem index="0" value="id"/>
+            <StringItem index="1" value="nombres"/>
+            <StringItem index="2" value="apellidos"/>
+            <StringItem index="3" value="telefono"/>
+            <StringItem index="4" value="direccion"/>
+            <StringItem index="5" value="email"/>
           </StringArray>
         </Property>
       </Properties>
