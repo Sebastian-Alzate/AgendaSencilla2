@@ -41,7 +41,7 @@ public class CControl {
         return bandera;
     }
     
-    public boolean editar(String nombres, String apellidos, String direccion, String telefono, String email) {
+    public boolean editar(String nombres, String apellidos, String telefono, String direccion, String email) {
         conecta = con.conectar();
         boolean bandera = consulta.editar(conecta, nombres, apellidos, telefono, direccion, email);
         con.desconectar(conecta);

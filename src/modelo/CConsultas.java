@@ -172,7 +172,7 @@ public class CConsultas {
 
     public ArrayList<CContacto> buscarApellido(Connection con, String apellido) {
         this.con = con;
-        query = "SELECT * FROM datos WHERE nombres LIKE '" + apellido + "%';";
+        query = "SELECT * FROM datos WHERE apellidos LIKE '" + apellido + "%';";
         ArrayList<CContacto> lista = new ArrayList<>();
         try {
             PreparedStatement preparar = con.prepareStatement(query);
