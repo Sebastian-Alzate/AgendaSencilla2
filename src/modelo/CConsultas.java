@@ -276,7 +276,7 @@ public class CConsultas {
 
     public ArrayList<CContacto> listarPrefijos(Connection con, String prefijo) {
         this.con = con;
-        query = "SELECT * FROM datos WHERE telefono LIKE '%" + prefijo + "%';";
+        query = "SELECT * FROM datos WHERE telefono LIKE '" + prefijo + "%';";
         ArrayList<CContacto> lista = new ArrayList<>();
         try {
             PreparedStatement preparar = con.prepareStatement(query);
@@ -391,8 +391,7 @@ public class CConsultas {
                     lista.add(c);
                 }
                 System.out.println("Datos del campo id consultados.");
-            }
-            if (campo.equals("nombres")) {
+            } else if (campo.equals("nombres")) {
                 while (resultado.next()) {
                     CContacto c = new CContacto(0, resultado.getString(campo), "", "", "", "");
                     lista.add(c);
