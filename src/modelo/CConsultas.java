@@ -428,4 +428,29 @@ public class CConsultas {
             return null;
         }
     }
+
+    public int mostrarCantidad(Connection con) {
+        this.con = con;
+        query = "SELECT * FROM datos WHERE direccion LIKE '%manizales%';";
+        int cont = 0;
+        try {
+            PreparedStatement preparar = con.prepareStatement(query);
+            ResultSet resultado = preparar.executeQuery();
+            while (resultado.next()) {
+                CContacto c = new CContacto(
+                        resultado.getInt("id"),
+                        resultado.getString("nombres"),
+                        resultado.getString("apellidos"),
+                        resultado.getString("telefono"),
+                        resultado.getString("direccion"),
+                        resultado.getString("email"));
+                cont++;
+            }
+            System.out.println("Cantidad de contactos que viven en manizales.");
+            return cont;
+        } catch (SQLException ex) {
+            System.out.println("Error en el sql");
+            return 0;
+        }
+    }
 }

@@ -190,4 +190,15 @@ public class CControl {
             return null;
         }
     }
+    
+    public int mostrarCantidad() {
+        conecta = con.conectar();
+        if (conecta != null) {
+            int cant = consulta.mostrarCantidad(conecta);
+            con.desconectar(conecta);
+            return cant;
+        } else {
+            return 0;
+        }
+    }
 }
