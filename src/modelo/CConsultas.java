@@ -380,7 +380,7 @@ public class CConsultas {
 
     public ArrayList<CContacto> listarCampo(Connection con, String campo) {
         this.con = con;
-        query = "SELECT id, " + campo + " FROM datos;";
+        query = "SELECT " + campo + " FROM datos;";
         ArrayList<CContacto> lista = new ArrayList<>();
         try {
             PreparedStatement preparar = con.prepareStatement(query);
@@ -437,19 +437,30 @@ public class CConsultas {
             PreparedStatement preparar = con.prepareStatement(query);
             ResultSet resultado = preparar.executeQuery();
             while (resultado.next()) {
-                CContacto c = new CContacto(
-                        resultado.getInt("id"),
-                        resultado.getString("nombres"),
-                        resultado.getString("apellidos"),
-                        resultado.getString("telefono"),
-                        resultado.getString("direccion"),
-                        resultado.getString("email"));
                 cont++;
             }
             System.out.println("Cantidad de contactos que viven en manizales.");
             return cont;
         } catch (SQLException ex) {
             System.out.println("Error en el sql");
+            return 0;
+        }
+    }
+
+    public int cantidadNombre(Connection con, String nombres) {
+        this.con = con;
+        query = "SELECT * FROM datos WHERE nombres LIKE '%" + nombres + "%';";
+        int cont = 0;
+        try {
+            PreparedStatement preparar = con.prepareStatement(query);
+            ResultSet resultado = preparar.executeQuery();
+            while (resultado.next()) {
+                cont++;
+            }
+            System.out.println("Cantidad de contactos con el nombre: " + nombres);
+            return cont;
+        } catch (SQLException ex) {
+            System.out.println("Error en el sql.");
             return 0;
         }
     }

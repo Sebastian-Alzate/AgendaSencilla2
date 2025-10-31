@@ -201,4 +201,15 @@ public class CControl {
             return 0;
         }
     }
+    
+    public int mostrarCantidadNombre(String nombres) {
+        conecta = con.conectar();
+        if (conecta != null) {
+            int cant = consulta.cantidadNombre(conecta, nombres);
+            con.desconectar(conecta);
+            return cant;
+        } else {
+            return 0;
+        }
+    }
 }
